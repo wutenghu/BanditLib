@@ -1,5 +1,7 @@
 import numpy as np
 from util_functions import vectorize
+
+
 class LinUCBUserStruct:
     def __init__(self, featureDimension, lambda_, init="zero"):
         self.d = featureDimension
@@ -36,6 +38,8 @@ class LinUCBUserStruct:
         var = np.sqrt(np.dot(np.dot(article_FeatureVector, self.AInv),  article_FeatureVector))
         pta = mean + alpha * var
         return pta, mean, alpha * var
+
+
 class Uniform_LinUCBAlgorithm(object):
     def __init__(self, dimension, alpha, lambda_, init="zero"):
         self.dimension = dimension
@@ -127,6 +131,7 @@ class LinUCB_SelectUserAlgorithm(N_LinUCBAlgorithm):
 
         return userPicked, articlePicked
 
+
 class Hybrid_LinUCB_singleUserStruct(LinUCBUserStruct):
     def __init__(self, userFeature, lambda_, userID):
         LinUCBUserStruct.__init__(self, len(userFeature), lambda_)
@@ -140,7 +145,6 @@ class Hybrid_LinUCB_singleUserStruct(LinUCBUserStruct):
         self.B +=np.outer(articlePicked_FeatureVector, additionalFeatureVector)
     def updateTheta(self, beta):
         self.UserTheta = np.dot(self.AInv, (self.b- np.dot(self.B, beta)))
-
 
 
 class Hybrid_LinUCBUserStruct:
