@@ -235,7 +235,6 @@ class simulateOnlineData(object):
             f.write('\n')
 
 
-
         # Training
         shuffle(self.articles)
         for iter_ in range(self.training_iterations):
