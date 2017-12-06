@@ -69,7 +69,7 @@ class Uniform_LinUCBAlgorithm(object):
 
 #---------------LinUCB(fixed user order) algorithm---------------
 class N_LinUCBAlgorithm:
-    def __init__(self, dimension, alpha, lambda_, n, init="zero"):  # n is number of users
+    def __init__(self, dimension, alpha, lambda_, init="zero"):  # n is number of users
         self.users = {}
         self.dimension = dimension
         self.alpha = alpha

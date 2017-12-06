@@ -8,7 +8,7 @@ class PTSArticleStruct:
         self.sigma = sigma
         self.sigmaV = sigmaV
 
-        self.A2 = 1.0/(self.sigmaV**2)*np.identity(n = self.dimension)
+        self.A2 = 1.0/(self.sigmaV**2)*np.identity(n=self.dimension)
         self.b2 = np.zeros(self.dimension)
         self.A2Inv = np.linalg.inv(self.A2)
         self.Mu = 1.0/(self.sigma**2)*self.A2Inv.dot(self.b2)
@@ -16,6 +16,7 @@ class PTSArticleStruct:
         self.count = {}
 
         self.V = np.random.multivariate_normal(self.Mu, self.A2Inv)
+
     def updateParameters(self, user, click):
         if user.id in self.count:
             self.count[user.id] += 1
@@ -35,6 +36,8 @@ class PTSArticleStruct:
             return self.count[user_id]
         else:
             return 0
+
+
 class PTSUserStruct:
     def __init__(self, id, dimension, sigma, sigmaU, init="zero"):
         self.id = id

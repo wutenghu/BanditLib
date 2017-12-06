@@ -113,10 +113,10 @@ class simulateOnlineData(object):
                     G[i.id][j.id] = 1
 
         L = csgraph.laplacian(G, normed = False)
-        print L
+        print(L)
         I = np.identity(n = G.shape[0])
         GW = I + Gepsilon*L  # W is a double stochastic matrix
-        print 'GW', GW
+        print('GW {}'.format(GW))
         return GW.T
 
     def getW(self):
@@ -144,10 +144,10 @@ class simulateOnlineData(object):
             ui.CoTheta = np.zeros(self.context_dimension+self.latent_dimension)
             for uj in self.users:
                 ui.CoTheta += self.W[uj.id][ui.id] * np.asarray(uj.theta)
-            print 'Users', ui.id, 'CoTheta', ui.CoTheta
+            print('Users {}, CoTheta {}'.format(ui.id, ui.CoTheta))
 
     def batchRecord(self, iter_):
-        print "Iteration %d"%iter_, "Pool", len(self.articlePool)," Elapsed time", datetime.datetime.now() - self.startTime
+        print('Iteration {}, Pool {}, Elapsed time {}'.format(iter_, len(self.articlePool), datetime.datetime.now() - self.startTime))
 
     def regulateArticlePool(self):
         # Randomly generate articles
@@ -338,12 +338,12 @@ class simulateOnlineData(object):
                     f.write(',' + ','.join([str(RDiffList[alg_name][-1]) for alg_name in RDiffList.iterkeys()]))
                     f.write('\n')
 
-        if (self.plot==True): # only plot
+        if self.plot: # only plot
             # plot the results
             f, axa = plt.subplots(1, sharex=True)
             for alg_name in algorithms.iterkeys():
                 axa.plot(tim_, BatchCumlateRegret[alg_name],label = alg_name)
-                print '%s: %.2f' % (alg_name, BatchCumlateRegret[alg_name][-1])
+                print('{}: {}'.format(alg_name, BatchCumlateRegret[alg_name][-1]))
             axa.legend(loc='upper left',prop={'size':9})
             axa.set_xlabel("Iteration")
             axa.set_ylabel("Regret")
@@ -382,9 +382,9 @@ def pca_articles(articles, order):
     pca = PCA()
     X_new = pca.fit_transform(X)
     # X_new = np.asarray(X)
-    print('pca variance in each dim:', pca.explained_variance_ratio_)
+    print('pca variance in each dim: {}'.format(pca.explained_variance_ratio_))
 
-    print X_new
+    print(X_new)
     #default is descending order, where the latend features use least informative dimensions.
     if order == 'random':
         np.random.shuffle(X_new.T)
@@ -486,7 +486,7 @@ if __name__ == '__main__':
                         sparseLevel = sparseLevel,
                         poolArticleSize = poolSize, NoiseScale = NoiseScale, epsilon = epsilon, Gepsilon =Gepsilon)
 
-    print "Starting for ", simExperiment.simulation_signature
+    print("Starting for ", simExperiment.simulation_signature)
 
     algorithms = {}
 

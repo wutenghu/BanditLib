@@ -1,7 +1,0 @@
-.project
-.pydevproject
-.gitignore
-.idea/*
-*.pyc
-*.csv
-./SimulationResults/*
